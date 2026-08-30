@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.example.taller01.data.Producto
 import com.example.taller01.ui.EstadoUiProductos
 import com.example.taller01.ui.components.TarjetaProducto
-
+import androidx.compose.ui.res.stringResource
+import com.example.taller01.R
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PantallaListaProductos(
@@ -54,7 +55,7 @@ fun PantallaListaProductos(
                         color = MaterialTheme.colorScheme.primaryContainer
                     ) {
                         Text(
-                            text = "Total de productos: ${estadoUi.productos.size}",
+                            text = stringResource(R.string.total_productos, estadoUi.productos.size),
                             modifier = Modifier.padding(12.dp),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,

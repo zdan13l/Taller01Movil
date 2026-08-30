@@ -33,12 +33,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.taller01.R
 import com.example.taller01.data.Producto
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,15 +50,25 @@ fun PantallaDetalleProducto(
     modificador: Modifier = Modifier
 ) {
     val contexto = LocalContext.current
+    val mensajeSms = stringResource(
+        R.string.mensaje_sms,
+        producto.titulo,
+        producto.descripcion
+    )
 
     Scaffold(
         modifier = modificador,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Detalle del producto") },
+                title = {
+                    Text(text = stringResource(R.string.titulo_detalle_producto))
+                },
                 navigationIcon = {
                     IconButton(onClick = alVolver) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.volver)
+                        )
                     }
                 }
             )
@@ -69,7 +80,6 @@ fun PantallaDetalleProducto(
                 .padding(paddingInterno),
             contentPadding = PaddingValues(16.dp)
         ) {
-            // Carrusel de imágenes del producto
             item {
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(producto.imagenes.ifEmpty { listOf(producto.miniatura) }) { urlImagen ->
@@ -86,7 +96,6 @@ fun PantallaDetalleProducto(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Título: al hacer clic abre el marcador telefónico (ACTION_DIAL) con el id del producto
             item {
                 Text(
                     text = producto.titulo,
@@ -102,27 +111,23 @@ fun PantallaDetalleProducto(
                 Spacer(modifier = Modifier.height(4.dp))
             }
 
-            // Categoría
             item {
                 Text(
-                    text = "Categoría: ${producto.categoria}",
+                    text = stringResource(R.string.categoria, producto.categoria),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
-            // Descripción: al hacer clic abre la app de mensajería con "título: descripción" precargado.
-            // Se usa ACTION_SENDTO (no ACTION_SEND) porque es el intent que las apps de SMS
-            // realmente registran para el esquema "smsto:" (ver documentación oficial de Android).
             item {
                 Text(
                     text = producto.descripcion,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.clickable {
-                        val intencionSms = Intent(Intent.ACTION_SENDTO).apply {
-                            data = Uri.parse("smsto:")
-                            putExtra("sms_body", "${producto.titulo}: ${producto.descripcion}")
+                        val intencionSms = Intent(Intent.ACTION_SEND).apply {
+                            setDataAndType(Uri.parse("smsto:"), "text/plain")
+                            putExtra(Intent.EXTRA_TEXT, mensajeSms)
                         }
                         contexto.startActivity(intencionSms)
                     }
@@ -130,23 +135,24 @@ fun PantallaDetalleProducto(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Etiquetas (tags)
             item {
-                Text(text = "Etiquetas", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = stringResource(R.string.etiquetas),
+                    style = MaterialTheme.typography.titleMedium
+                )
                 Spacer(modifier = Modifier.height(8.dp))
+
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(producto.etiquetas) { etiqueta ->
                         SuggestionChip(
                             onClick = {},
-                            label = { Text(etiqueta) },
-                            colors = SuggestionChipDefaults.suggestionChipColors()
+                            label = { Text(etiqueta) }
                         )
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Dimensiones
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -154,24 +160,45 @@ fun PantallaDetalleProducto(
                     elevation = CardDefaults.cardElevation(1.dp)
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text(text = "Dimensiones", style = MaterialTheme.typography.titleMedium)
+                        Text(
+                            text = stringResource(R.string.dimensiones),
+                            style = MaterialTheme.typography.titleMedium
+                        )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text(text = "Ancho: ${producto.dimensiones.ancho}")
-                        Text(text = "Alto: ${producto.dimensiones.alto}")
-                        Text(text = "Profundidad: ${producto.dimensiones.profundidad}")
+                        Text(
+                            text = stringResource(
+                                R.string.ancho,
+                                producto.dimensiones.ancho
+                            )
+                        )
+                        Text(
+                            text = stringResource(
+                                R.string.alto,
+                                producto.dimensiones.alto
+                            )
+                        )
+                        Text(
+                            text = stringResource(
+                                R.string.profundidad,
+                                producto.dimensiones.profundidad
+                            )
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Reseñas
             item {
                 Text(
-                    text = "Reseñas (${producto.resenas.size})",
+                    text = stringResource(
+                        R.string.resenas,
+                        producto.resenas.size
+                    ),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
             }
+
             items(producto.resenas) { resena ->
                 Card(
                     modifier = Modifier
@@ -186,24 +213,35 @@ fun PantallaDetalleProducto(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = resena.nombreAutor, fontWeight = FontWeight.SemiBold)
+                            Text(
+                                text = resena.nombreAutor,
+                                fontWeight = FontWeight.SemiBold
+                            )
+
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
                                     imageVector = Icons.Filled.Star,
                                     contentDescription = null,
-                                    tint = Color(0xFFFFB300)
+                                    tint = MaterialTheme.colorScheme.tertiary
                                 )
                                 Text(text = resena.calificacion.toString())
                             }
                         }
-                        Text(text = resena.comentario, style = MaterialTheme.typography.bodyMedium)
+
+                        Text(
+                            text = resena.comentario,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 }
             }
 
             item {
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                Text(text = "Precio: $${producto.precio}", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = stringResource(R.string.precio, producto.precio),
+                    style = MaterialTheme.typography.titleMedium
+                )
             }
         }
     }

@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Taller01</string>
+    <string name="titulo_detalle_producto">Detalle del producto</string>
+    <string name="volver">Volver</string>
+    <string name="categoria">Categoría: %1$s</string>
+    <string name="etiquetas">Etiquetas</string>
+    <string name="dimensiones">Dimensiones</string>
+    <string name="ancho">Ancho: %1$s</string>
+    <string name="alto">Alto: %1$s</string>
+    <string name="profundidad">Profundidad: %1$s</string>
+    <string name="resenas">Reseñas (%1$d)</string>
+    <string name="precio">Precio: $%1$s</string>
+    <string name="total_productos">Total de productos: %1$d</string>
+    <string name="error_desconocido">Error desconocido al cargar productos</string>
+    <string name="mensaje_sms">%1$s: %2$s</string>
 </resources>
