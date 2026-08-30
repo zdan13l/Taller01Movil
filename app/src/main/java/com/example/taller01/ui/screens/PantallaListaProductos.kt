@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -51,7 +52,7 @@ fun PantallaListaProductos(
                 // Encabezado fijo (StickyHeader) con el total de productos, pedido en el taller
                 stickyHeader {
                     Surface(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxWidth(),
                         color = MaterialTheme.colorScheme.primaryContainer
                     ) {
                         Text(

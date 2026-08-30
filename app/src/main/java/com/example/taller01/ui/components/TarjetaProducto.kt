@@ -16,12 +16,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.taller01.R
 import com.example.taller01.data.Producto
 
 // Componente reutilizable para mostrar un producto dentro del grid.
@@ -64,7 +65,7 @@ fun TarjetaProducto(producto: Producto, alHacerClic: (Producto) -> Unit, modific
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "$${producto.precio}",
+                        text = stringResource(R.string.precio_tarjeta, producto.precio),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -72,7 +73,7 @@ fun TarjetaProducto(producto: Producto, alHacerClic: (Producto) -> Unit, modific
                         Icon(
                             imageVector = Icons.Filled.Star,
                             contentDescription = null,
-                            tint = Color(0xFFFFB300),
+                            tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.padding(end = 2.dp)
                         )
                         Text(

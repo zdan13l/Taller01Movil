@@ -10,6 +10,7 @@
     <string name="profundidad">Profundidad: %1$s</string>
     <string name="resenas">Reseñas (%1$d)</string>
     <string name="precio">Precio: $%1$s</string>
+    <string name="precio_tarjeta">$%1$s</string>
     <string name="total_productos">Total de productos: %1$d</string>
     <string name="error_desconocido">Error desconocido al cargar productos</string>
     <string name="mensaje_sms">%1$s: %2$s</string>
