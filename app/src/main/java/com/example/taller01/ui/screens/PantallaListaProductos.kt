@@ -23,12 +23,11 @@ import com.example.taller01.ui.EstadoUiProductos
 import com.example.taller01.ui.components.TarjetaProducto
 import androidx.compose.ui.res.stringResource
 import com.example.taller01.R
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PantallaListaProductos(
-    estadoUi: EstadoUiProductos,
-    alHacerClicProducto: (Producto) -> Unit,
-    modificador: Modifier = Modifier
+fun PantallaListaProductos(estadoUi: EstadoUiProductos,
+    alHacerClicProducto: (Producto) -> Unit, modificador: Modifier = Modifier
 ) {
     when (estadoUi) {
         is EstadoUiProductos.Cargando -> {
@@ -49,7 +48,7 @@ fun PantallaListaProductos(
                 modifier = modificador.fillMaxSize(),
                 contentPadding = PaddingValues(8.dp)
             ) {
-                // Encabezado fijo (StickyHeader) con el total de productos, pedido en el taller
+                // Encabezado fijo con el total de productos.
                 stickyHeader {
                     Surface(
                         modifier = Modifier.fillMaxWidth(),

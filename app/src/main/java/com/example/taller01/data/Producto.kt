@@ -3,19 +3,17 @@ package com.example.taller01.data
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// Respuesta completa que entrega el API de DummyJSON al consultar la lista de productos
+// Respuesta que entrega el API al consultar la lista de productos.
 @Serializable
 data class RespuestaProductos(
-    @SerialName("products") val productos: List<Producto> = emptyList(),
-    val total: Int = 0,
+    @SerialName("products") val productos: List<Producto> = emptyList(), val total: Int = 0,
     @SerialName("skip") val omitidos: Int = 0,
     @SerialName("limit") val limite: Int = 0
 )
 
-// Representa un producto individual devuelto por el API
+// Representa un producto individual devuelto por el API.
 @Serializable
-data class Producto(
-    val id: Int,
+data class Producto(val id: Int,
     @SerialName("title") val titulo: String,
     @SerialName("description") val descripcion: String,
     @SerialName("category") val categoria: String,

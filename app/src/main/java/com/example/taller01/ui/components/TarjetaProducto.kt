@@ -38,9 +38,7 @@ fun TarjetaProducto(producto: Producto, alHacerClic: (Producto) -> Unit, modific
             AsyncImage(
                 model = producto.miniatura,
                 contentDescription = producto.titulo,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
+                modifier = Modifier.fillMaxWidth().aspectRatio(1f),
                 contentScale = ContentScale.Crop
             )
             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp)) {
@@ -59,9 +57,7 @@ fun TarjetaProducto(producto: Producto, alHacerClic: (Producto) -> Unit, modific
                     overflow = TextOverflow.Ellipsis
                 )
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 4.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(

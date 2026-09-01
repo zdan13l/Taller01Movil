@@ -2,7 +2,7 @@ package com.example.taller01.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Paleta Material 3 exportada desde Material Theme Builder.
+// Paleta de colores usados en la aplicación.
 val PrimaryLight = Color(0xFF3E6700)
 val OnPrimaryLight = Color(0xFFFFFFFF)
 val PrimaryContainerLight = Color(0xFF4F8200)
@@ -19,7 +19,6 @@ val SurfaceVariantLight = Color(0xFFDEE6CD)
 val OnSurfaceVariantLight = Color(0xFF424937)
 val ErrorLight = Color(0xFFBA1A1A)
 val OnErrorLight = Color(0xFFFFFFFF)
-
 val PrimaryDark = Color(0xFF97D945)
 val OnPrimaryDark = Color(0xFF1F3700)
 val PrimaryContainerDark = Color(0xFF64A104)

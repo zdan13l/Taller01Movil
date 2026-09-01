@@ -10,7 +10,7 @@ import kotlinx.serialization.json.Json
 
 private const val URL_PRODUCTOS = "https://dummyjson.com/products?limit=194"
 
-// Encargado de consultar el API de DummyJSON. El ViewModel lo invoca una sola vez.
+// Repositorio encargado de consultar el API, el ViewModel lo invoca una sola vez.
 class RepositorioProductos {
 
     private val cliente = HttpClient(OkHttp) {

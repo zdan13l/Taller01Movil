@@ -27,7 +27,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
-import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -44,11 +43,7 @@ import com.example.taller01.data.Producto
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PantallaDetalleProducto(
-    producto: Producto,
-    alVolver: () -> Unit,
-    modificador: Modifier = Modifier
-) {
+fun PantallaDetalleProducto(producto: Producto, alVolver: () -> Unit, modificador: Modifier = Modifier) {
     val contexto = LocalContext.current
     val mensajeSms = stringResource(
         R.string.mensaje_sms,
@@ -75,9 +70,7 @@ fun PantallaDetalleProducto(
         }
     ) { paddingInterno ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(paddingInterno),
+            modifier = Modifier.fillMaxWidth().padding(paddingInterno),
             contentPadding = PaddingValues(16.dp)
         ) {
             item {
@@ -87,9 +80,7 @@ fun PantallaDetalleProducto(
                             model = urlImagen,
                             contentDescription = producto.titulo,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .height(200.dp)
-                                .fillMaxWidth(0.9f)
+                            modifier = Modifier.height(200.dp).fillMaxWidth(0.9f)
                         )
                     }
                 }
@@ -125,9 +116,9 @@ fun PantallaDetalleProducto(
                     text = producto.descripcion,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.clickable {
-                        val intencionSms = Intent(Intent.ACTION_SEND).apply {
-                            setDataAndType(Uri.parse("smsto:"), "text/plain")
-                            putExtra(Intent.EXTRA_TEXT, mensajeSms)
+                        val intencionSms = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("smsto:")
+                            putExtra("sms_body", mensajeSms)
                         }
                         contexto.startActivity(intencionSms)
                     }
@@ -201,9 +192,7 @@ fun PantallaDetalleProducto(
 
             items(producto.resenas) { resena ->
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
                     shape = RoundedCornerShape(12.dp),
                     elevation = CardDefaults.cardElevation(1.dp)
                 ) {
